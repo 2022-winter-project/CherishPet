@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: prod
+
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/cherishpet
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create # DB 어떻게 실행할지 (none, create ,update ..)
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        default_batch_fetch_size: 100 # 왠만하면 키는 것이 좋음
+    defer-datasource-initialization: true
+
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.type: trace

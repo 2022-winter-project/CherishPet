@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    expose:
+      - 3000
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/frontend
+      - ./frontend/node_modules/:/frontend/node_modules
+    restart: always
+    stdin_open: true
+    tty: true
+
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./backend/Dockerfile
+    expose:
+      - 8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend/build/libs/:/backend/
+    restart: always
+    stdin_open: true
+    tty: true
