@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 public class User {
 
