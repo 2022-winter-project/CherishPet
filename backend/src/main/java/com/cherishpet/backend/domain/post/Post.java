@@ -11,7 +11,7 @@ import java.sql.Time;
 import java.util.Date;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED) // single table 전략 사용
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // single table 전략 사용
 @NoArgsConstructor
 @AllArgsConstructor
 @DiscriminatorColumn(name = "DTYPE")
