@@ -2,17 +2,20 @@ package com.cherishpet.backend.domain.post;
 
 import com.cherishpet.backend.domain.User;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.lang.reflect.Member;
 import java.sql.Time;
 import java.util.Date;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED) // 자식테이블 하나로 전부 합침
+@Inheritance(strategy = InheritanceType.JOINED) // single table 전략 사용
 @NoArgsConstructor
 @AllArgsConstructor
+@DiscriminatorColumn(name = "DTYPE")
+@Getter
 public abstract class Post {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
