@@ -21,17 +21,20 @@ public class MemberServiceTest {
     @Test
     public void 회원정보_등록() throws Exception {
         //given
-        final Member member = createMember();
+        final Member member1 = createMember(1);
+        final Member member2 = createMember(2);
         //when
-        Long saveId = memberService.join(member);
+        Long saveId1 = memberService.join(member1);
+        Long saveId2 = memberService.join(member2);
         //then
-        assertEquals("회원 등록 실패",member.getId(),memberRepository.findOne(saveId).getId());
+        assertEquals("회원 등록 실패",member1.getId(),memberRepository.findOne(saveId1).getId());
+        assertEquals("회원 등록 실패",member2.getId(),memberRepository.findOne(saveId2).getId());
     }
 
     @Test
     public void 회원정보_조회() throws Exception {
         //given
-        Member member1 = createMember();
+        Member member1 = createMember(1);
         Long findId = memberService.join(member1);
         //when
         Member member2 = memberService.findMemberInfo(findId);
@@ -40,10 +43,10 @@ public class MemberServiceTest {
 
     }
 
-    public Member createMember(){
+    public Member createMember(int i){
         return Member.builder()
-                .username("test")
-                .name("홍길동")
+                .username("test"+i)
+                .name("홍길동"+i)
                 .sex("M")
                 .age(30)
                 .phoneNumber("010-xxxx-xxxx")
