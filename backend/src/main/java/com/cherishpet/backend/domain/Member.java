@@ -10,22 +10,21 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
-public class User {
+public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "member_id")
     private Long id;
 
     @NotEmpty(message = "아이디를 입력해주세요")
     @Column(nullable = false)
     private String username;
 
-    @NotEmpty(message = "비밀번호를 입력해주세요")
     @Column(nullable = false)
-    private String password;
+    private String email;
 
-    @NotEmpty
-    @Column(nullable = false)
+    // **** 회원 추가 정보 ****
+
     private String name;
 
     @Column(length = 1)
@@ -33,11 +32,19 @@ public class User {
 
     private int age;
 
-    @NotEmpty(message = "번호를 입력해주세요")
-    @Column(nullable = false)
     private String phoneNumber;
 
     private String personality;
+
+    /** 비즈니스 로직 **/
+    // 회원 정보 등록
+    public void updateMember(String name, String sex, int age, String phoneNumber, String personality){
+        this.name = name;
+        this.sex = sex;
+        this.age = age;
+        this.phoneNumber = phoneNumber;
+        this.personality = personality;
+    }
 
 
 
