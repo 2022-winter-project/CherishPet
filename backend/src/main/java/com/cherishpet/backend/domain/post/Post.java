@@ -1,6 +1,6 @@
 package com.cherishpet.backend.domain.post;
 
-import com.cherishpet.backend.domain.User;
+import com.cherishpet.backend.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,7 +24,7 @@ public abstract class Post {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private User user_id; // 연관관계의 주인
+    private Member member_id; // 연관관계의 주인
 
     @Column(nullable = false)
     private String place;
