@@ -13,7 +13,6 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Transactional
 public class MemberServiceTest {
 
     @Autowired MemberService memberService;
@@ -22,11 +21,11 @@ public class MemberServiceTest {
     @Test
     public void 회원정보_등록() throws Exception {
         //given
-        Member member = createMember();
+        final Member member = createMember();
         //when
         Long saveId = memberService.join(member);
         //then
-        assertEquals("회원이 정상등록되었다.",member,memberRepository.findOne(saveId));
+        assertEquals("회원 등록 실패",member.getId(),memberRepository.findOne(saveId).getId());
     }
 
     @Test
@@ -37,7 +36,8 @@ public class MemberServiceTest {
         //when
         Member member2 = memberService.findMemberInfo(findId);
         //then
-        assertEquals("회원정보조회가 가능하다.",findId,member1.getId());
+        assertEquals("회원 정보 조회 실패",findId,member1.getId());
+
     }
 
     public Member createMember(){
