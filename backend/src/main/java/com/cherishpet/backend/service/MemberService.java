@@ -28,7 +28,7 @@ public class MemberService {
         member.updateMember(name, sex, age, phoneNumber, personality); // 변경 감지
     }
 
-    // 회원 정보 보기
+    // 회원 정보 조회
     public Member findMemberInfo(Long id){
         return memberRepository.findOne(id);
     }

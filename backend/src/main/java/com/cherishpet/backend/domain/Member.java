@@ -20,7 +20,6 @@ public class Member {
     @Column(nullable = false)
     private String username;
 
-    @Column(nullable = false)
     private String email;
 
     // **** 회원 추가 정보 ****
