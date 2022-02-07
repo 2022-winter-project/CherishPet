@@ -44,11 +44,4 @@ public class Member {
         this.phoneNumber = phoneNumber;
         this.personality = personality;
     }
-
-
-
-
-
-
-
 }

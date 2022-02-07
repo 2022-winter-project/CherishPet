@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create-drop # 종료 시점에 table drop / 만약 db에 데이터 존재하는지 확인하고 싶다면 create으로 변경
     properties:
       hibernate:
         show_sql: true
