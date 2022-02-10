@@ -52,4 +52,11 @@ public abstract class Post {
 
     private String imageURL;
 
+    public void updatePost(String region,String phoneNumber, Date volunteerDate, Time volunteerTime, String content){
+        this.region = region;
+        this.phoneNumber = phoneNumber;
+        this.volunteerDate = volunteerDate;
+        this.volunteerTime = volunteerTime;
+        this.content = content;
+    }
 }
