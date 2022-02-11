@@ -41,7 +41,7 @@ public class MemberServiceTest {
         Member member1 = createMember(1);
         Long findId = memberService.join(member1);
         //when
-        Member member2 = memberService.findMemberInfo(findId);
+        Member member2 = memberService.findMemberById(findId);
         //then
         assertEquals(findId,member1.getId());
 

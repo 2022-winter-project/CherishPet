@@ -16,6 +16,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     // 로그인
+    @Transactional
     public Long join(Member member) {
         memberRepository.save(member);
         return member.getId();
