@@ -29,8 +29,12 @@ public class MemberService {
     }
 
     // 회원 정보 조회
-    public Member findMemberInfo(Long id){
+    public Member findMemberById(Long id){
         return memberRepository.findOne(id);
     }
 
+    // 전체 회원 조회
+    public List<Member> findMembers(){
+        return memberRepository.findAll();
+    }
 }
