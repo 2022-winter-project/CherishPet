@@ -1,60 +1,30 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Dimensions,
-} from "react-native";
-import { Image } from "react-native";
+// In App.js in a new project
 
-const { width: SCREEN_WIDTH } = Dimensions.get("window");
+import React, { Component } from "react";
+import { View, Text, Button, TouchableOpacity } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import StartScreen from "./src/StartPage";
+import LoginScreen from "./src/Login";
+import { StyleSheet } from "react-native";
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <View>
-        <Image style={styles.logo} source={require("./icon/logo_white.png")} />
-      </View>
-      <Text style={styles.appText}>CHERISH PET!</Text>
-      <StatusBar style="auto" />
-      <View style={styles.startBtn}>
-        <TouchableOpacity>
-          <Text style={styles.startText}>시작하기</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="StartPage"
+          component={StartScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Login"
+          component={LoginScreen}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#D8E1FF",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  appText: {
-    fontSize: 20,
-    fontWeight: "700",
-  },
-  startBtn: {
-    backgroundColor: "white",
-    alignItems: "center",
-    paddingBottom: 7,
-    paddingTop: 7,
-    borderRadius: 50,
-    width: SCREEN_WIDTH * 0.3,
-    shadowColor: "#000000",
-    shadowOpacity: 0.3,
-    shadowOffset: { width: 2, height: 2 },
-    elevation: 3,
-    marginTop: SCREEN_WIDTH * 0.2,
-  },
-  startText: { fontSize: 16 },
-  logo: {
-    resizeMode: "contain",
-    width: SCREEN_WIDTH * 0.4,
-    height: SCREEN_WIDTH * 0.5,
-  },
-});
