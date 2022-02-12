@@ -38,13 +38,14 @@ public class MemberController {
                 .member(member).build();
         return new Response(200,true,"found member successfully", memberInfoDto);
     }
-    // 회원가입
+    // 기본 회원가입
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/api/v1/members")
     public Response createMember(@RequestBody @Valid CreateMemberDto request) throws Exception{
         Member member = Member.builder()
                 .username(request.getUsername())
-                .email(request.getEmail())
+                .password(request.getPassword())
+                .name(request.getName())
                 .build();
         memberService.join(member);
         MemberInfoDto memberInfoDto = MemberInfoDto.ToDto(member);

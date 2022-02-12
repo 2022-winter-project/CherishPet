@@ -10,10 +10,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateMemberDto {
     private String username;
-    private String email;
+    private String password;
+    private String name;
 
     public CreateMemberDto(Member member){
         this.username = member.getUsername();
-        this.email = member.getEmail();
+        this.password = member.getPassword();
+        this.name = member.getName();
     }
 }
