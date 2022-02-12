@@ -1,20 +1,20 @@
 version: '3'
 
 services:
-  frontend:
-    build:
-      context: .
-      dockerfile: ./frontend/Dockerfile
-    expose:
-      - 3000
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/frontend
-      - ./frontend/node_modules/:/frontend/node_modules
-    restart: always
-    stdin_open: true
-    tty: true
+  # frontend:
+  #   build:
+  #     context: .
+  #     dockerfile: ./frontend/Dockerfile
+  #   expose:
+  #     - 3000
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - ./frontend:/frontend
+  #     - ./frontend/node_modules/:/frontend/node_modules
+  #   restart: always
+  #   stdin_open: true
+  #   tty: true
 
 
   backend:
@@ -25,8 +25,29 @@ services:
       - 8080
     ports:
       - "8080:8080"
+    links:
+      - mysql_db:mysql_db
+    depends_on:
+      - mysql_db
     volumes:
       - ./backend/build/libs/:/backend/
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/cherishdata?serverTimezone=Asia/Seoul
+      SPRING_DATASOURCE_USERNAME: cherishpet
+      SPRING_DATASOURCE_PASSWORD: thddlcofla
     restart: always
     stdin_open: true
     tty: true
+
+  mysql_db:
+    image: mysql:latest
+    restart: always
+    volumes:
+       - ./mysql/db:/var/lib/mysql
+       - ./mysql/init:/docker-entrypoint-initdb.d/:ro
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=testdb
+      - MYSQL_ROOT=%
+      - MYSQL_PASSWORD=1234
