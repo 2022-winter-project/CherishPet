@@ -20,11 +20,11 @@ public class Member {
     @Column(nullable = false)
     private String username;
 
-    private String email;
-
-    // **** 회원 추가 정보 ****
+    private String password;
 
     private String name;
+
+    // **** 회원 추가 정보 ****
 
     @Column(length = 1)
     private String sex;
