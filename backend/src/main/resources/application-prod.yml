@@ -13,6 +13,6 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     defer-datasource-initialization: true
 
-  logging.level:
-    org.hibernate.SQL: debug
-    org.hibernate.type: trace
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.type: trace
