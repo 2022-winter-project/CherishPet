@@ -95,17 +95,18 @@ const styles = StyleSheet.create({
   },
   loginBtn: {
     backgroundColor: "#D8E1FF",
-    fontSize: 15,
+    fontSize: 17,
     alignItems: "center",
     textAlign: "center",
-    paddingBottom: 7,
-    paddingTop: 7,
+    paddingBottom: 8,
+    paddingTop: 8,
     borderRadius: 50,
     width: SCREEN_WIDTH * 0.55,
     shadowColor: "#000000",
     shadowOpacity: 0.3,
     shadowOffset: { width: 2, height: 2 },
     elevation: 3,
+    marginTop: SCREEN_HEIGHT * 0.01,
     marginBottom: SCREEN_HEIGHT * 0.05,
   },
   signupBtn: {
@@ -118,13 +119,13 @@ const styles = StyleSheet.create({
     opacity: 0.1,
   },
   sns: {
-    flex: 2,
+    flex: 1.5,
     alignItems: "center",
     marginTop: SCREEN_HEIGHT * 0.05,
   },
   snsText: {
     fontSize: 18,
-    marginBottom: SCREEN_HEIGHT * 0.05,
+    marginBottom: SCREEN_HEIGHT * 0.02,
     opacity: 0.6,
   },
   loginLogo: {
@@ -135,12 +136,12 @@ const styles = StyleSheet.create({
   },
   kakao: {
     resizeMode: "contain",
-    width: SCREEN_WIDTH * 0.1,
-    height: SCREEN_HEIGHT * 0.1,
+    width: SCREEN_WIDTH * 0.15,
+    height: SCREEN_HEIGHT * 0.15,
   },
   naver: {
     resizeMode: "contain",
-    width: SCREEN_WIDTH * 0.1,
-    height: SCREEN_HEIGHT * 0.1,
+    width: SCREEN_WIDTH * 0.15,
+    height: SCREEN_HEIGHT * 0.15,
   },
 });
