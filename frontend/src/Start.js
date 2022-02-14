@@ -10,7 +10,7 @@ import { Image } from "react-native";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
-export default function StartPage({ navigation }) {
+export default function Start({ navigation }) {
   return (
     <View style={styles.container}>
       <View>
