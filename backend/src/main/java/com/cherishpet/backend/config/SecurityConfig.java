@@ -4,6 +4,7 @@ import com.cherishpet.backend.jwt.JwtAccessDeniedHandler;
 import com.cherishpet.backend.jwt.JwtAuthenticationEntryPoint;
 import com.cherishpet.backend.jwt.JwtSecurityConfig;
 import com.cherishpet.backend.jwt.TokenProvider;
+import io.swagger.models.HttpMethod;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -48,8 +49,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web
                 .ignoring()
                 .antMatchers(
-                        "/h2-console/**"
-                        ,"/favicon.ico"
+                        "/favicon.ico"
+                        ,"/error"
+                        ,"/swagger-ui/**"
+                        ,"/swagger-resources/**"
+                        ,"/v2/api-docs"
+                        ,"/v3/api-docs"
                 );
     }
 
@@ -72,8 +77,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //세션 사용 x
 
                 .and()
+
                 .authorizeRequests()
                 // 아래 3가지 api에 대해서는 토큰 없이도 호출 허용
+
                 .antMatchers("/api/hello").permitAll()
                 .antMatchers("/api/v1/authenticate").permitAll()
                 .antMatchers("/api/v1/members").permitAll()
