@@ -8,6 +8,7 @@ spring:
     username: cherishpet
     password: thddlcofla
     driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: always
 
   jpa:
     hibernate:
@@ -18,7 +19,6 @@ spring:
         format_sql: true
         default_batch_fetch_size: 100
         dialect: org.hibernate.dialect.MySQL57Dialect
-    defer-datasource-initialization: true
 
 logging.level:
   org.hibernate.SQL: debug

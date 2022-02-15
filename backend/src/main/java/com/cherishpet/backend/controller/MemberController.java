@@ -64,20 +64,21 @@ public class MemberController {
 
         return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
     }
-    @GetMapping("/user")
+    @GetMapping("/api/v1/member")
     @PreAuthorize("hasAnyRole('USER','ADMIN')") // 두 권한 모두 호출 가능한 api
     public ResponseEntity<Member> getMyUserInfo() {
         return ResponseEntity.ok(memberService.getMyUserWithAuthorities().get());
     }
 
-    @GetMapping("/user/{username}")
+    @GetMapping("/api/v1/member/{username}")
     @PreAuthorize("hasAnyRole('ADMIN')") // 관리자 권한만 호출 가능한 api
     public ResponseEntity<Member> getUserInfo(@PathVariable String username) {
         return ResponseEntity.ok(memberService.getUserWithAuthorities(username).get());
     }
 
     // 전체 회원 조회
-    @GetMapping("/api/v1/members")
+    @GetMapping("/api/v1/members/all")
+    @PreAuthorize("hasAnyRole('ADMIN')") // 관리자 권한만 호출 가능한 api
     public Response findAllMembers() throws Exception {
         List<Member> members = memberService.findMembers();
         List<MemberInfoDto> collect =  members.stream()
@@ -89,6 +90,7 @@ public class MemberController {
 
     // 특정 회원 조회 (by id)
     @GetMapping("/api/v1/members/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')") // 관리자 권한만 호출 가능한 api
     public Response findMemberById(@PathVariable("id") Long id) throws Exception {
         Member member = memberService.findMemberById(id);
         MemberInfoDto memberInfoDto = MemberInfoDto.builder()
