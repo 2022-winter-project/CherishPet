@@ -7,16 +7,23 @@ spring:
     username: cherishpet
     password: thddlcofla
     driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: always
 
   jpa:
     hibernate:
-      ddl-auto: create # DB 어떻게 실행할지 (none, create ,update ..)
+      ddl-auto: create
     properties:
       hibernate:
         show_sql: true
         format_sql: true
         default_batch_fetch_size: 100
-    defer-datasource-initialization: true
+        dialect: org.hibernate.dialect.MySQL57Dialect
+
+jwt:
+  header: Authorization
+  secret: 4oCYY2hlcmlzaHBldC10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtY2hlcmlzaHBldC10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXTigJkK
+  token-validity-in-seconds: 86400
+
 logging.level:
   org.hibernate.SQL: debug
   org.hibernate.type: trace

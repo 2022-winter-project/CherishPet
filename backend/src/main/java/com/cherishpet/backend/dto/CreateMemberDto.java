@@ -2,12 +2,14 @@ package com.cherishpet.backend.dto;
 
 import com.cherishpet.backend.domain.Member;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class CreateMemberDto {
     private String username;
     private String password;
