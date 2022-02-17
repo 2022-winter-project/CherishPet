@@ -23,7 +23,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
  * */
 
 @Configuration
-@EnableWebSecurity // web 보완 활성화
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final TokenProvider tokenProvider;
@@ -51,10 +52,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/favicon.ico"
                         ,"/error"
-                        ,"/swagger-ui/**"
-                        ,"/swagger-resources/**"
-                        ,"/v2/api-docs"
-                        ,"/v3/api-docs"
+                        ,"/v2/api-docs",
+                        "/configuration/ui",
+                        "/swagger-resources/**",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**"
                 );
     }
 
@@ -84,6 +87,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/hello").permitAll()
                 .antMatchers("/api/v1/authenticate").permitAll()
                 .antMatchers("/api/v1/members").permitAll()
+                .antMatchers("/v2/api-docs").permitAll()
+                .antMatchers("/configuration/**").permitAll()
+                .antMatchers("/swagger*/**").permitAll()
                 .anyRequest().authenticated()
 
                 .and()
