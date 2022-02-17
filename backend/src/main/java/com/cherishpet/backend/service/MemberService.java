@@ -3,6 +3,7 @@ package com.cherishpet.backend.service;
 import com.cherishpet.backend.domain.Authority;
 import com.cherishpet.backend.domain.Member;
 import com.cherishpet.backend.dto.CreateMemberDto;
+import com.cherishpet.backend.exception.MemberNotFoundException;
 import com.cherishpet.backend.repository.MemberRepository;
 import com.cherishpet.backend.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
@@ -50,11 +51,23 @@ public class MemberService {
      */
 
     public Optional<Member> getUserWithAuthorities(String username) {
-        return memberRepository.findOneWithAuthoritiesByUsername(username);
+        Optional<Member> result = memberRepository.findOneWithAuthoritiesByUsername(username);
+        if (result.isEmpty()){
+            throw new MemberNotFoundException();
+        }
+        else{
+            return result;
+        }
     }
 
     public Optional<Member> getMyUserWithAuthorities() {
-        return SecurityUtil.getCurrentUsername().flatMap(memberRepository::findOneWithAuthoritiesByUsername);
+        Optional<Member> result = SecurityUtil.getCurrentUsername().flatMap(memberRepository::findOneWithAuthoritiesByUsername);
+         if (result.isEmpty()){
+            throw new MemberNotFoundException();
+         }
+         else {
+             return result;
+         }
     }
 
     // 회원 정보 등록

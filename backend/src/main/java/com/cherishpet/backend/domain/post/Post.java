@@ -46,11 +46,14 @@ public abstract class Post {
     @Column(nullable = false)
     private Time volunteerTime;
 
-    private int requiredNum;
+    private int requiredNum; // 필요 인원 수
 
-    private int applicationNum;
+    private int applicationNum; // 신청한 인원 수
 
     private String imageURL;
+
+    @Enumerated(EnumType.STRING)
+    private MatchingStatus matchingStatus;
 
     public void updatePost(String region,String phoneNumber, Date volunteerDate, Time volunteerTime, String content){
         this.region = region;

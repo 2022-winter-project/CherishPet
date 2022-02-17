@@ -37,7 +37,7 @@ public class MemberRepository  {
                 .setParameter("username", username)
                 .getResultList();
         if (result.isEmpty()){
-            return Optional.ofNullable(null);
+            return Optional.empty();
         }
         else{
             return Optional.ofNullable(result.get(0));

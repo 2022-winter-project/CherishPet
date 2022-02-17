@@ -66,14 +66,14 @@ public class MemberController {
     }
     @GetMapping("/api/v1/member")
     @PreAuthorize("hasAnyRole('USER','ADMIN')") // 두 권한 모두 호출 가능한 api
-    public ResponseEntity<Member> getMyUserInfo() {
-        return ResponseEntity.ok(memberService.getMyUserWithAuthorities().get());
+    public Response getMyUserInfo() {
+        return new Response(200,true,"found member successfully", memberService.getMyUserWithAuthorities().get());
     }
 
     @GetMapping("/api/v1/member/{username}")
     @PreAuthorize("hasAnyRole('ADMIN')") // 관리자 권한만 호출 가능한 api
-    public ResponseEntity<Member> getUserInfo(@PathVariable String username) {
-        return ResponseEntity.ok(memberService.getUserWithAuthorities(username).get());
+    public Response getUserInfo(@PathVariable String username) {
+        return new Response(200,true,"found member successfully", memberService.getUserWithAuthorities(username).get());
     }
 
     // 전체 회원 조회
