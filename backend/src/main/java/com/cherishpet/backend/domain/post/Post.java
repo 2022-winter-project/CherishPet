@@ -24,7 +24,7 @@ public abstract class Post {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private Member member_id; // 연관관계의 주인
+    private Member member; // 연관관계의 주인
 
     @Column(nullable = false)
     private String place;
@@ -43,7 +43,6 @@ public abstract class Post {
 
     private Date volunteerDate;
 
-    @Column(nullable = false)
     private Time volunteerTime;
 
     private int requiredNum; // 필요 인원 수
@@ -55,7 +54,8 @@ public abstract class Post {
     @Enumerated(EnumType.STRING)
     private MatchingStatus matchingStatus;
 
-    public void updatePost(String region,String phoneNumber, Date volunteerDate, Time volunteerTime, String content){
+    @Builder
+    public void updatePost(String region, String phoneNumber, Date volunteerDate, Time volunteerTime, String content){
         this.region = region;
         this.phoneNumber = phoneNumber;
         this.volunteerDate = volunteerDate;

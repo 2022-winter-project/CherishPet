@@ -19,6 +19,7 @@ public class ApplicationService {
         return applicationRepository.findOne(id);
     }
 
+    // username 으로 신청 내역 조회
     public List<Application> findApplicationsByUsername(String username){
         return applicationRepository.findApplicationsByUsername(username);
     }
