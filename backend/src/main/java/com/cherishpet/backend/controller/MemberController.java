@@ -8,8 +8,6 @@ import com.cherishpet.backend.dto.TokenDto;
 import com.cherishpet.backend.jwt.JwtFilter;
 import com.cherishpet.backend.jwt.TokenProvider;
 import com.cherishpet.backend.service.MemberService;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -96,15 +94,5 @@ public class MemberController {
         MemberInfoDto memberInfoDto = MemberInfoDto.builder()
                 .member(member).build();
         return new Response(200,true,"found member successfully", memberInfoDto);
-    }
-
-
-    @Getter
-    @AllArgsConstructor
-    static class Response<T> {
-        private int code;
-        private Boolean success;
-        private String message;
-        private T result;
     }
 }

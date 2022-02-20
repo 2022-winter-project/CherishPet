@@ -31,13 +31,14 @@ public class ApplicationServiceTest {
         CreateMemberDto member = createMember(1);
         CreatePostDto post = createPost(1);
 
+        System.out.println("test!!!"+ post.getCategory());
         Long memberId = memberService.join(member);
         Long postId = postService.savePost(post);
 
         //when
         Long applicationId = postService.apply(memberId,postId);
         Application application = applicationService.findOne(applicationId);
-        
+
         //then
         assertEquals(applicationId,application.getId());
     }

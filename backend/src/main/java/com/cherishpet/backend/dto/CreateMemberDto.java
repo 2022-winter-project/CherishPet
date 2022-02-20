@@ -22,6 +22,7 @@ public class CreateMemberDto {
         this.password = member.getPassword();
         this.name = member.getName();
     }
+    
     public static Member toEntity(CreateMemberDto memberDto){
         Authority authority = Authority.builder()
                 .authorityName("ROLE_USER")

@@ -28,7 +28,6 @@ public class CreatePostDto {
     private String imageURL;
     private String category; // Flight, Facility, TemporaryCare, Etc
 
-    @Builder
     public CreatePostDto(Post post) {
         this.title = post.getTitle();
         this.place = post.getPlace();
