@@ -11,7 +11,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.management.LockInfo;
 import java.util.List;
+
+import static com.cherishpet.backend.util.SecurityUtil.getCurrentUsername;
 
 @Service
 @Transactional(readOnly = true)
@@ -22,9 +25,13 @@ public class PostService {
     private final PostRepository postRepository;
     private final ApplicationRepository applicationRepository;
 
-    // 내가 올린 게시글 조회
-    public Post findMyPost(Long id){
+    public Post findOne(Long id){
         return postRepository.findOne(id);
+    }
+
+    // 내가 올린 게시글 조회
+    public List<Post> findPostByUsername(String username){
+        return postRepository.findPostByUsername(username);
     }
 
 /**
@@ -39,7 +46,11 @@ public class PostService {
     // 게시글 등록
     @Transactional
     public Long savePost(CreatePostDto createPostDto){
-        Post post = CreatePostDto.toEntity(createPostDto);
+        String username = getCurrentUsername().get();
+        Member member = memberRepository.findOneWithAuthoritiesByUsername(username).get();
+
+        //게시물 생성
+        Post post = Post.createPost(createPostDto,member);
         postRepository.save(post);
 
         return post.getId();

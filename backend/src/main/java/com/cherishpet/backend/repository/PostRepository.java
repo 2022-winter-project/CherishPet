@@ -21,6 +21,12 @@ public class PostRepository {
         return em.find(Post.class,id);
     }
 
+    public List<Post> findPostByUsername(String username) {
+        return em.createQuery("select p from Post p join fetch p.member where p.member.username=:username",Post.class)
+                .setParameter("username",username)
+                .getResultList();
+
+    }
     public List<Post> findAll() {
         return em.createQuery("select m from Post m", Post.class)
                 .getResultList();
