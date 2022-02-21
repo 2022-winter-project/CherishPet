@@ -106,11 +106,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowOffset: { width: 2, height: 2 },
     elevation: 3,
-    marginTop: SCREEN_HEIGHT * 0.01,
     marginBottom: SCREEN_HEIGHT * 0.05,
   },
   signupBtn: {
     borderBottomWidth: 1,
+    alignItems: "center",
+    textAlign: "center",
   },
   line: {
     borderBottomColor: "black",
@@ -119,9 +120,10 @@ const styles = StyleSheet.create({
     opacity: 0.1,
   },
   sns: {
-    flex: 1.5,
+    flex: 2,
     alignItems: "center",
-    marginTop: SCREEN_HEIGHT * 0.05,
+    textAlign: "center",
+    justifyContent: "center",
   },
   snsText: {
     fontSize: 18,
