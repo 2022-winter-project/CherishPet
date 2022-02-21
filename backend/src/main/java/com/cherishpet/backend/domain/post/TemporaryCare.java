@@ -1,6 +1,7 @@
 package com.cherishpet.backend.domain.post;
 
 import com.cherishpet.backend.domain.Member;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import java.sql.Time;
 import java.util.Date;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class TemporaryCare extends Post{
 

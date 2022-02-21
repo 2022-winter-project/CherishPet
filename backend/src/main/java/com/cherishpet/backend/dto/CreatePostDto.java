@@ -1,10 +1,7 @@
 package com.cherishpet.backend.dto;
 
 import com.cherishpet.backend.domain.post.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.lang.management.LockInfo;
 import java.sql.Time;
@@ -12,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
 public class CreatePostDto {

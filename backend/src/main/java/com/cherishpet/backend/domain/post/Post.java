@@ -4,10 +4,7 @@ import com.cherishpet.backend.domain.Member;
 import com.cherishpet.backend.dto.CreatePostDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -18,7 +15,7 @@ import static com.cherishpet.backend.util.SecurityUtil.getCurrentUsername;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE) // single table 전략 사용
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @DiscriminatorColumn(name = "DTYPE")
 @Getter
