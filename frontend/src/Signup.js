@@ -25,7 +25,7 @@ export default function Home({ navigation }) {
         <Image style={styles.logo} source={require("../icon/logo_white.png")} />
         <Text style={styles.appText}>CHERISH PET!</Text>
       </View>
-      <View style={styles.login}>
+      <View style={styles.signUp}>
         <TextInput
           style={styles.input}
           onChangeText={setPw}
@@ -45,7 +45,7 @@ export default function Home({ navigation }) {
           placeholder="비밀번호"
         />
         <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-          <Text style={styles.loginBtn}>회원가입</Text>
+          <Text style={styles.signUpBtn}>회원가입</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.line} />
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "700",
   },
-  login: {
+  signUp: {
     flex: 3,
     width: SCREEN_WIDTH,
     alignItems: "center",
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     width: SCREEN_WIDTH * 0.55,
     borderColor: "#9C9C9C",
   },
-  loginBtn: {
+  signUpBtn: {
     backgroundColor: "#D8E1FF",
     fontSize: 17,
     alignItems: "center",

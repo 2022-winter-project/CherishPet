@@ -17,6 +17,10 @@ export default function Login({ navigation }) {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
 
+  const onPressLogin = () => {
+    alert("hi");
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -37,7 +41,12 @@ export default function Login({ navigation }) {
           value={pw}
           placeholder="비밀번호"
         />
-        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+        <TouchableOpacity
+          onPress={() => {
+            onPressLogin();
+            navigation.navigate("Home");
+          }}
+        >
           <Text style={styles.loginBtn}>로그인</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
