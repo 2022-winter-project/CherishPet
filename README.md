@@ -20,9 +20,9 @@
    http://localhost:8080/swagger-ui.html
     
 4. API Doc 
-   1) 회원가입 
-      [POST] localhost:8080/api/v1/members
-      [RequestBody] 
+   1) 회원가입    
+      [POST] localhost:8080/api/v1/members   
+      [RequestBody]   
       ```shell 
       {
           "username":"qwe123",
@@ -30,9 +30,9 @@
           "name":"qwe123"
       }
       ```
-   2) 로그인 
-      [POST] localhost:8080/api/v1/authenticate
-      [RequestBody] 
+   2) 로그인  
+      [POST] localhost:8080/api/v1/authenticate  
+      [RequestBody]   
       ```shell
       {
           "username": "admin",
