@@ -2,9 +2,11 @@ package com.cherishpet.backend.domain.post;
 
 import com.cherishpet.backend.domain.Member;
 import com.cherishpet.backend.dto.CreatePostDto;
+import com.cherishpet.backend.dto.UpdatePostDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.sql.Update;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -135,12 +137,12 @@ public abstract class Post {
 
     //==게시물 수정 메서드==//
     @Builder
-    public void updatePost(String region, String phoneNumber, Date volunteerDate, Time volunteerTime, String content){
-        this.region = region;
-        this.phoneNumber = phoneNumber;
-        this.volunteerDate = volunteerDate;
-        this.volunteerTime = volunteerTime;
-        this.content = content;
+    public void updatePost(UpdatePostDto updatePostDto){
+        this.region = updatePostDto.getRegion();
+        this.phoneNumber = updatePostDto.getPhoneNum();
+        this.volunteerDate = updatePostDto.getVolunteerDate();
+        this.volunteerTime = updatePostDto.getVolunteerTime();
+        this.content = updatePostDto.getContent();
     }
 
     // 신청인원 추가

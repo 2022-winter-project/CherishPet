@@ -4,6 +4,7 @@ import com.cherishpet.backend.domain.Application;
 import com.cherishpet.backend.domain.Member;
 import com.cherishpet.backend.domain.post.Post;
 import com.cherishpet.backend.dto.CreatePostDto;
+import com.cherishpet.backend.dto.UpdatePostDto;
 import com.cherishpet.backend.repository.ApplicationRepository;
 import com.cherishpet.backend.repository.MemberRepository;
 import com.cherishpet.backend.repository.PostRepository;
@@ -56,6 +57,19 @@ public class PostService {
         return post.getId();
     }
 
+    // 게시물 수정
+    public void updatePost(UpdatePostDto updatePostDto) {
+        Post post = postRepository.findOne(updatePostDto.getPost_id());
+        post.updatePost(updatePostDto);
+        postRepository.save(post);
+    }
+
+    // 게시물 삭제
+    public void removePost(Long post_id){
+        Post post = postRepository.findOne(post_id);
+        postRepository.remove(post);
+    }
+
     // 특정 게시글 봉사 신청
     @Transactional
     public Long apply(Long memberId, Long postId){
@@ -63,6 +77,9 @@ public class PostService {
         //엔티티 조회
         Member member = memberRepository.findOne(memberId);
         Post post = postRepository.findOne(postId);
+
+        //신청자 수 늘리기
+        post.addApplicationNumber();
 
         //봉사 신청서 생성
         Application application = Application.createApplication(member,post);

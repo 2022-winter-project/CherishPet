@@ -25,17 +25,6 @@ public class CreatePostDto {
     private String imageURL;
     private String category; // Flight, Facility, TemporaryCare, Etc
 
-    public CreatePostDto(Post post) {
-        this.title = post.getTitle();
-        this.place = post.getPlace();
-        this.region = post.getRegion();
-        this.phoneNum = post.getPhoneNumber();
-        this.volunteerDate = post.getVolunteerDate();
-        this.volunteerTime = post.getVolunteerTime();
-        this.requiredNum = post.getRequiredNum();
-        this.content = post.getContent();
-        this.imageURL = post.getImageURL();
-    }
 
     public static Post toEntity(CreatePostDto createPostDto) {
         Post post;
