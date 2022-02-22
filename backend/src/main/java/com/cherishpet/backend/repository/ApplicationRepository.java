@@ -26,8 +26,25 @@ public class ApplicationRepository {
         return
                 em.createQuery("select a " +
                                         "from Application a " +
-                                        "join fetch a.member where a.member.username =:username", Application.class)
+                                        "join fetch a.member " +
+                                        "where a.member.username =:username", Application.class)
                 .setParameter("username",username)
                 .getResultList();
+    }
+
+    public Optional findApplicationByPostId(Long postId) {
+        List<Application> result = em.createQuery("select a " +
+                                "from Application a " +
+                                "join fetch a.post " +
+                                "where a.post.id=:postId", Application.class)
+                                .setParameter("postId", postId)
+                                .getResultList();
+
+        if (result.isEmpty()){
+            return Optional.empty();
+        }
+        else{
+            return Optional.ofNullable(result.get(0));
+        }
     }
 }

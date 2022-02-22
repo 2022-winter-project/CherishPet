@@ -132,6 +132,7 @@ public abstract class Post {
                         .build();
                 break;
         }
+        //member.getPosts().add(post);
         return post;
     }
 

@@ -5,6 +5,7 @@ import com.cherishpet.backend.domain.Member;
 import com.cherishpet.backend.domain.post.Post;
 import com.cherishpet.backend.dto.CreatePostDto;
 import com.cherishpet.backend.dto.UpdatePostDto;
+import com.cherishpet.backend.exception.UnAuthorizedMemberException;
 import com.cherishpet.backend.repository.ApplicationRepository;
 import com.cherishpet.backend.repository.MemberRepository;
 import com.cherishpet.backend.repository.PostRepository;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.management.LockInfo;
 import java.util.List;
+import java.util.Optional;
 
 import static com.cherishpet.backend.util.SecurityUtil.getCurrentUsername;
 
@@ -58,15 +60,25 @@ public class PostService {
     }
 
     // 게시물 수정
-    public void updatePost(UpdatePostDto updatePostDto) {
-        Post post = postRepository.findOne(updatePostDto.getPost_id());
+    @Transactional
+    public void updatePost(Long id, UpdatePostDto updatePostDto) {
+        Post post = postRepository.findOne(id);
         post.updatePost(updatePostDto);
         postRepository.save(post);
     }
 
     // 게시물 삭제
+    @Transactional
     public void removePost(Long post_id){
+        String username = getCurrentUsername().get();
         Post post = postRepository.findOne(post_id);
+        if (!post.getMember().getUsername().equals(username)){
+            throw new UnAuthorizedMemberException("권한이 없습니다.");
+        }
+        Optional applications = applicationRepository.findApplicationByPostId(post_id);
+        if(!applications.isEmpty()){
+            throw new IllegalStateException("신청한 봉사자가 존재합니다. 취소를 먼저 해주세요.");
+        }
         postRepository.remove(post);
     }
 

@@ -27,6 +27,7 @@ public class PostRepository {
                 .getResultList();
 
     }
+
     public List<Post> findAll() {
         return em.createQuery("select m from Post m", Post.class)
                 .getResultList();
@@ -35,5 +36,4 @@ public class PostRepository {
     public void remove(Post post){
         em.remove(post);
     }
-
 }

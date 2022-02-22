@@ -1,10 +1,13 @@
 package com.cherishpet.backend.domain;
 
+import com.cherishpet.backend.domain.post.Post;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -48,6 +51,10 @@ public class Member {
     private String phoneNumber;
 
     private String personality;
+
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "post")
+//    private List<Post> posts = new ArrayList<>();
 
     /** 비즈니스 로직 **/
     // 회원 정보 등록
