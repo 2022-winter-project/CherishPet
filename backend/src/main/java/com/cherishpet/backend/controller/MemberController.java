@@ -62,22 +62,18 @@ public class MemberController {
 
         return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
     }
+
+    // 자신의 정보 조회 (이력서 조회)
     @GetMapping("/api/v1/member")
     @PreAuthorize("hasAnyRole('USER','ADMIN')") // 두 권한 모두 호출 가능한 api
     public Response getMyUserInfo() {
         return new Response(200,true,"found member successfully", memberService.getMyUserWithAuthorities().get());
     }
 
-    @GetMapping("/api/v1/member/{username}")
-    @PreAuthorize("hasAnyRole('ADMIN')") // 관리자 권한만 호출 가능한 api
-    public Response getUserInfo(@PathVariable String username) {
-        return new Response(200,true,"found member successfully", memberService.getUserWithAuthorities(username).get());
-    }
-
     // 전체 회원 조회
     @GetMapping("/api/v1/members/all")
     @PreAuthorize("hasAnyRole('ADMIN')") // 관리자 권한만 호출 가능한 api
-    public Response findAllMembers() throws Exception {
+    public Response getAllMembers() throws Exception {
         List<Member> members = memberService.findMembers();
         List<MemberInfoDto> collect =  members.stream()
                 .map(member -> new MemberInfoDto(member))
@@ -89,10 +85,18 @@ public class MemberController {
     // 특정 회원 조회 (by id)
     @GetMapping("/api/v1/members/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')") // 관리자 권한만 호출 가능한 api
-    public Response findMemberById(@PathVariable("id") Long id) throws Exception {
+    public Response getMemberById(@PathVariable("id") Long id) throws Exception {
         Member member = memberService.findMemberById(id);
         MemberInfoDto memberInfoDto = MemberInfoDto.builder()
                 .member(member).build();
         return new Response(200,true,"found member successfully", memberInfoDto);
     }
+
+    // 특정 회원 조회 (by username)
+    @GetMapping("/api/v1/member/{username}")
+    @PreAuthorize("hasAnyRole('ADMIN')") // 관리자 권한만 호출 가능한 api
+    public Response getUserInfo(@PathVariable String username) {
+        return new Response(200,true,"found member successfully", memberService.getUserWithAuthorities(username).get());
+    }
+
 }

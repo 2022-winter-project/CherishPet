@@ -22,6 +22,7 @@ public class Member {
     @Column(nullable = false, length = 50, unique = true)
     private String username;
 
+    @JsonIgnore
     @Column(length = 100)
     private String password;
 
@@ -31,6 +32,7 @@ public class Member {
     private boolean activated;
     // **** 회원 추가 정보 ****
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "member_authority",
