@@ -47,7 +47,7 @@ public class MemberController {
 
     // 로그인 시 권한 검증 및 인증정보가 담긴 토큰 생성 api
     @PostMapping("/api/v1/authenticate")
-    public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto loginDto) {
+    public Response authorize(@Valid @RequestBody LoginDto loginDto) {
 
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
@@ -60,7 +60,7 @@ public class MemberController {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
 
-        return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
+        return new Response(201,true,"login member successfully", new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK));
     }
 
     // 자신의 정보 조회 (이력서 조회)
