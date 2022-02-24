@@ -9,14 +9,45 @@ import {
   TextInput,
 } from "react-native";
 import { Image } from "react-native";
+import axios from "axios";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
 export default function Home({ navigation }) {
+  const [name, setName] = useState("");
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
-  const [name, setName] = useState("");
+
+  const onPress = async () => {
+    //navigation.navigate("Home");
+    const data = {
+      name: name, // 이름
+      username: id, // 아이디
+      password: pw, // 비밀번호
+    };
+
+    try {
+      const response = await axios
+        .post(`http://192.168.0.12:8080/api/v1/members`, data)
+        .then(function (response) {
+          console.log(response);
+          alert("여긴옴");
+          if (response.data["success"] == true) {
+            setName("");
+            setId("");
+            setPw("");
+            alert("회원가입되었습니다.");
+          }
+        })
+        .catch(function (error) {
+          alert(error.response.data);
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -28,8 +59,8 @@ export default function Home({ navigation }) {
       <View style={styles.signUp}>
         <TextInput
           style={styles.input}
-          onChangeText={setPw}
-          value={pw}
+          onChangeText={setName}
+          value={name}
           placeholder="이름"
         />
         <TextInput
@@ -40,11 +71,11 @@ export default function Home({ navigation }) {
         />
         <TextInput
           style={styles.input}
-          onChangeText={setName}
-          value={name}
+          onChangeText={setPw}
+          value={pw}
           placeholder="비밀번호"
         />
-        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+        <TouchableOpacity onPress={() => onPress()}>
           <Text style={styles.signUpBtn}>회원가입</Text>
         </TouchableOpacity>
       </View>

@@ -9,6 +9,7 @@ import {
   TextInput,
 } from "react-native";
 import { Image } from "react-native";
+import axios from "axios";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
@@ -17,8 +18,37 @@ export default function Login({ navigation }) {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
 
-  const onPressLogin = () => {
-    alert("hi");
+  const onPressLogin = async () => {
+    //navigation.navigate("Home");
+    const data = {
+      username: id, // 아이디
+      password: pw, // 비밀번호
+    };
+
+    try {
+      const response = await axios
+        .post(`http://192.168.0.12:8080/api/v1/authenticate`, data)
+        .then(
+          function (response) {
+            console.log(response);
+            //alert("여긴옴");
+            //if (response.data["success"] == true) {
+
+            setName("");
+            setId("");
+            setPw("");
+            alert("로그인되었습니다.");
+          }
+          //}
+        )
+        .catch(function (error) {
+          alert(error.response.data);
+          console.log(error);
+          console.log(error.response.data);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -44,7 +74,6 @@ export default function Login({ navigation }) {
         <TouchableOpacity
           onPress={() => {
             onPressLogin();
-            navigation.navigate("Home");
           }}
         >
           <Text style={styles.loginBtn}>로그인</Text>
