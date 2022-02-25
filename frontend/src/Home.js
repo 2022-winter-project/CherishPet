@@ -5,15 +5,22 @@ import {
   View,
   TouchableOpacity,
   Dimensions,
+  TextInput,
 } from "react-native";
 import { Image } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useState } from "react";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 export default function Home({ navigation }) {
+  const [id, setId] = useState();
+  const storage = AsyncStorage.getItem("@id").then((userid) => setId(userid));
+
   return (
     <View style={styles.container}>
-      <Text>Home</Text>
+      <Text>{`안녕하세요 ${id}님`}</Text>
+      <TextInput value={id} placeholder={id} />
     </View>
   );
 }

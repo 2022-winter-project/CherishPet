@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Image } from "react-native";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
@@ -18,30 +19,45 @@ export default function Login({ navigation }) {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
 
-  const onPressLogin = async () => {
-    //navigation.navigate("Home");
-    const data = {
-      username: id, // 아이디
-      password: pw, // 비밀번호
-    };
-
+  const storeData = async (id) => {
     try {
-      const response = await axios
-        .post(`http://192.168.0.12:8080/api/v1/authenticate`, data)
-        .then(function (response) {
-          if (response.data["success"] == true) {
-            alert("로그인되었습니다.");
-            navigation.navigate("Home");
-            setId("");
-            setPw("");
-          }
-        })
-        .catch(function (error) {
-          alert(error.response.data);
-          console.log(error);
-        });
-    } catch (error) {
-      console.log(error);
+      await AsyncStorage.setItem("@id", JSON.stringify(id));
+      await AsyncStorage.getItem("@id").then((gg) => console.log(gg));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const onPressLogin = async () => {
+    if (id == "" || pw == "") {
+      alert("아이디와 비밀번호를 입력해 주세요");
+    } else {
+      const data = {
+        username: id, // 아이디
+        password: pw, // 비밀번호
+      };
+
+      try {
+        const response = await axios
+          .post(`http://192.168.0.12:8080/api/v1/authenticate`, data)
+          .then(function async(response) {
+            if (response.data["success"] == true) {
+              alert("로그인되었습니다.");
+              storeData(id);
+              navigation.navigate("Home");
+              setId("");
+              setPw("");
+              console.log(AsyncStorage.getItem("@id"));
+            }
+          })
+          .catch(function (error) {
+            alert("로그인 오류입니다.");
+            //console.log(error.response.data);
+            console.log(error);
+          });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
