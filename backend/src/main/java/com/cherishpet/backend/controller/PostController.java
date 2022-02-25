@@ -20,7 +20,7 @@ public class PostController {
 
     // 게시물 등록
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/api/v1/posts")
+    @PostMapping("/api/v1/post")
     public Response createPost(@RequestBody @Valid CreatePostDto createPostDto){
         Long id = postService.savePost(createPostDto);
         Post post = postService.findOne(id);
