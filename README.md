@@ -20,7 +20,6 @@
    http://localhost:8080/swagger-ui.html
     
 4. API Documentation  
-    -- **MEMBER** --  
     1) 회원가입    
         [POST] `localhost:8080/api/v1/members`   
         [RequestBody]   
@@ -45,13 +44,11 @@
         +) swagger test시 오른쪽 측면에 있는 Authrization 버튼 누르고 "Bearer" + " " + 발급받은 Token 키 입력 -> 다른 API 사용 가능  
         +) 헤더에 토큰 추가하지 않을 경우 UnAuthorized error 발생   
 
-  
-    -- **POST** --  
     3) 게시물 생성  
-        [POST] `localhost:8080/api/v1/post` 
-        [RequestBody] 
+        [POST] `localhost:8080/api/v1/post`  
+        [RequestBody]    
         ```shell
-        {
+         {
             "title":"test",
             "place":"test",
             "region":"region",
@@ -64,13 +61,13 @@
             "category":"Facility"
         }
         ```
+       
     4) 게시물 삭제  
         [DELETE] `localhost:8080/api/v1/post/{postId}`  
         게시물 아이디를 pathVariable로 함께 넣는다.   
     5) 나의 게시물 조회   
         [GET] `localhost:8080/api/v1/post`  
     
-    -- **APPLICATION** --  
     5) 봉사 신청   
         [POST] `localhost:8080/api/v1/application/{postId}`  
         신청하고자 하는 게시물 아이디를 pathVariable로 함께 넣는다.  
@@ -78,7 +75,7 @@
         [DELETE] `localhost:8080/api/v1/application/{applicationId}`  
         취소하고자 하는 봉사신청아이디를 pathVariable로 함께 넣는다.   
         --> 신청 아이디를 FE가 저장할 수 없다면 변경될수도!!   
-    7) 나의 신청내역 조회
+    7) 나의 신청내역 조회  
         [GET] `localhost:8080/api/v1/application`
 
       
