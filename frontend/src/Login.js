@@ -22,7 +22,6 @@ export default function Login({ navigation }) {
   const storeData = async (id) => {
     try {
       await AsyncStorage.setItem("@id", JSON.stringify(id));
-      await AsyncStorage.getItem("@id").then((gg) => console.log(gg));
     } catch (e) {
       console.log(e);
     }

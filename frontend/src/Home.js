@@ -15,7 +15,9 @@ const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 export default function Home({ navigation }) {
   const [id, setId] = useState();
-  const storage = AsyncStorage.getItem("@id").then((userid) => setId(userid));
+  const storage = AsyncStorage.getItem("@id").then((userid) =>
+    setId(userid.slice(1, -1))
+  );
 
   return (
     <View style={styles.container}>
