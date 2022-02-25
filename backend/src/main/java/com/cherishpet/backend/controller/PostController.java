@@ -29,9 +29,9 @@ public class PostController {
 
     // 게시물 조회
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/api/v1/post/{username}")
-    public Response getPostByUsername(@PathVariable String username){
-        List<Post> posts = postService.findPostByUsername(username);
+    @GetMapping("/api/v1/post")
+    public Response getPostByUsername(){
+        List<Post> posts = postService.findPostByUsername();
         return new Response(200,true,"found post successfully", posts);
     }
 

@@ -10,6 +10,7 @@ import com.cherishpet.backend.exception.ErrorCode;
 import com.cherishpet.backend.repository.ApplicationRepository;
 import com.cherishpet.backend.repository.MemberRepository;
 import com.cherishpet.backend.repository.PostRepository;
+import com.cherishpet.backend.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +34,8 @@ public class PostService {
     }
 
     // 내가 올린 게시글 조회
-    public List<Post> findPostByUsername(String username){
+    public List<Post> findPostByUsername(){
+        String username = SecurityUtil.getCurrentUsername().get();
         return postRepository.findPostByUsername(username);
     }
 
