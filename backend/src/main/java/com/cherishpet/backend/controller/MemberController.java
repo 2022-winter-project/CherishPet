@@ -73,7 +73,7 @@ public class MemberController {
     // 전체 회원 조회
     @GetMapping("/api/v1/members/all")
     @PreAuthorize("hasAnyRole('ADMIN')") // 관리자 권한만 호출 가능한 api
-    public Response getAllMembers() throws Exception {
+    public Response getAllMembers() {
         List<Member> members = memberService.findMembers();
         List<MemberInfoDto> collect =  members.stream()
                 .map(member -> new MemberInfoDto(member))

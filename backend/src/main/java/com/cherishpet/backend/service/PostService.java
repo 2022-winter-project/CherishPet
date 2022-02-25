@@ -5,7 +5,8 @@ import com.cherishpet.backend.domain.Member;
 import com.cherishpet.backend.domain.post.Post;
 import com.cherishpet.backend.dto.CreatePostDto;
 import com.cherishpet.backend.dto.UpdatePostDto;
-import com.cherishpet.backend.exception.UnAuthorizedMemberException;
+import com.cherishpet.backend.exception.CustomException;
+import com.cherishpet.backend.exception.ErrorCode;
 import com.cherishpet.backend.repository.ApplicationRepository;
 import com.cherishpet.backend.repository.MemberRepository;
 import com.cherishpet.backend.repository.PostRepository;
@@ -13,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.management.LockInfo;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,7 +73,7 @@ public class PostService {
         String username = getCurrentUsername().get();
         Post post = postRepository.findOne(post_id);
         if (!post.getMember().getUsername().equals(username)){
-            throw new UnAuthorizedMemberException("권한이 없습니다.");
+            throw new CustomException(ErrorCode.UNAUTHORIZED_MEMBER);
         }
         Optional applications = applicationRepository.findApplicationByPostId(post_id);
         if(!applications.isEmpty()){

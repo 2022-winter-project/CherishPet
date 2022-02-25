@@ -3,7 +3,8 @@ package com.cherishpet.backend.service;
 import com.cherishpet.backend.domain.Authority;
 import com.cherishpet.backend.domain.Member;
 import com.cherishpet.backend.dto.CreateMemberDto;
-import com.cherishpet.backend.exception.MemberNotFoundException;
+import com.cherishpet.backend.exception.CustomException;
+import com.cherishpet.backend.exception.ErrorCode;
 import com.cherishpet.backend.repository.MemberRepository;
 import com.cherishpet.backend.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ public class MemberService {
     @Transactional
     public Long join(CreateMemberDto memberDto) {
         if (memberRepository.findOneWithAuthoritiesByUsername(memberDto.getUsername()).orElse(null) != null)  {
-            throw new RuntimeException("이미 가입되어 있는 유저입니다.");
+            throw new CustomException(ErrorCode.DUPLICATE_RESOURCE);
         }
         Authority authority = Authority.builder()
                 .authorityName("ROLE_USER")
@@ -53,7 +54,7 @@ public class MemberService {
     public Optional<Member> getUserWithAuthorities(String username) {
         Optional<Member> result = memberRepository.findOneWithAuthoritiesByUsername(username);
         if (result.isEmpty()){
-            throw new MemberNotFoundException();
+            throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
         }
         else{
             return result;
@@ -63,7 +64,7 @@ public class MemberService {
     public Optional<Member> getMyUserWithAuthorities() {
         Optional<Member> result = SecurityUtil.getCurrentUsername().flatMap(memberRepository::findOneWithAuthoritiesByUsername);
          if (result.isEmpty()){
-            throw new MemberNotFoundException();
+            throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
          }
          else {
              return result;
