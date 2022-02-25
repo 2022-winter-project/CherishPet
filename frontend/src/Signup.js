@@ -31,13 +31,9 @@ export default function Home({ navigation }) {
       const response = await axios
         .post(`http://192.168.0.12:8080/api/v1/members`, data)
         .then(function (response) {
-          console.log(response);
-          alert("여긴옴");
           if (response.data["success"] == true) {
-            setName("");
-            setId("");
-            setPw("");
             alert("회원가입되었습니다.");
+            navigation.navigate("Login");
           }
         })
         .catch(function (error) {

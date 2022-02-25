@@ -28,23 +28,17 @@ export default function Login({ navigation }) {
     try {
       const response = await axios
         .post(`http://192.168.0.12:8080/api/v1/authenticate`, data)
-        .then(
-          function (response) {
-            console.log(response);
-            //alert("여긴옴");
-            //if (response.data["success"] == true) {
-
-            setName("");
+        .then(function (response) {
+          if (response.data["success"] == true) {
+            alert("로그인되었습니다.");
+            navigation.navigate("Home");
             setId("");
             setPw("");
-            alert("로그인되었습니다.");
           }
-          //}
-        )
+        })
         .catch(function (error) {
           alert(error.response.data);
           console.log(error);
-          console.log(error.response.data);
         });
     } catch (error) {
       console.log(error);
