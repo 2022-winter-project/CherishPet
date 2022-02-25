@@ -36,7 +36,7 @@ public class ApplicationServiceTest {
         Long postId = postService.savePost(post);
 
         //when
-        Long applicationId = postService.apply(memberId,postId);
+        Long applicationId = applicationService.apply(postId);
         Application application = applicationService.findOne(applicationId);
 
         //then

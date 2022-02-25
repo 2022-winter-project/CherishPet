@@ -1,10 +1,12 @@
 package com.cherishpet.backend.repository;
 
 import com.cherishpet.backend.domain.Application;
+import com.cherishpet.backend.domain.post.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,5 +48,14 @@ public class ApplicationRepository {
         else{
             return Optional.ofNullable(result.get(0));
         }
+    }
+
+    public void remove(Application application){
+        em.remove(application);
+    }
+
+    public Optional findPostByApplicationId(Long applicationId) {
+        Application application = findOne(applicationId);
+        return Optional.ofNullable(application.getPost());
     }
 }

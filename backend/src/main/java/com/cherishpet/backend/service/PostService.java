@@ -82,23 +82,4 @@ public class PostService {
         postRepository.remove(post);
     }
 
-    // 특정 게시글 봉사 신청
-    @Transactional
-    public Long apply(Long memberId, Long postId){
-
-        //엔티티 조회
-        Member member = memberRepository.findOne(memberId);
-        Post post = postRepository.findOne(postId);
-
-        //신청자 수 늘리기
-        post.addApplicationNumber();
-
-        //봉사 신청서 생성
-        Application application = Application.createApplication(member,post);
-
-        //저장
-        applicationRepository.save(application);
-
-        return application.getId();
-    }
 }

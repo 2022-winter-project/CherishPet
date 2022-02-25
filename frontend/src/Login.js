@@ -38,7 +38,7 @@ export default function Login({ navigation }) {
 
       try {
         const response = await axios
-          .post(`http://192.168.0.12:8080/api/v1/authenticate`, data)
+          .post(`http://192.168.35.175:8080/api/v1/authenticate`, data)
           .then(function async(response) {
             if (response.data["success"] == true) {
               alert("로그인되었습니다.");
