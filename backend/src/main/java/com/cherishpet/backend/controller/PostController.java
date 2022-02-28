@@ -2,6 +2,8 @@ package com.cherishpet.backend.controller;
 
 import com.cherishpet.backend.domain.post.Post;
 import com.cherishpet.backend.dto.CreatePostDto;
+import com.cherishpet.backend.dto.PostSerachDto;
+import com.cherishpet.backend.dto.SearchResultDto;
 import com.cherishpet.backend.dto.UpdatePostDto;
 import com.cherishpet.backend.service.ApplicationService;
 import com.cherishpet.backend.service.PostService;
@@ -51,4 +53,17 @@ public class PostController {
         return new Response(200,true,"delete post successfully", id);
     }
 
+    //게시물 조회
+    @GetMapping("/api/v1/post/search")
+    public Response searchPosts(@RequestParam(value="region") String region,
+                                @RequestParam(value="keyword") String keyword,
+                                @RequestParam(value="sorting") String sorting){
+        PostSerachDto postSerachDto = PostSerachDto.builder()
+                .region(region)
+                .keyword(keyword)
+                .sortType(sorting)
+                .build();
+        List<SearchResultDto> posts = postService.searchPost(postSerachDto);
+        return new Response(200,true,"get posts successfully", posts);
+    }
 }

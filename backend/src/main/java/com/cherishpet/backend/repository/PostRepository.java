@@ -2,15 +2,21 @@ package com.cherishpet.backend.repository;
 
 import com.cherishpet.backend.domain.Member;
 import com.cherishpet.backend.domain.post.Post;
+import com.cherishpet.backend.domain.post.QPost;
+import com.cherishpet.backend.dto.PostSerachDto;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
+import static com.cherishpet.backend.domain.post.QPost.post;
+
 @Repository
 @RequiredArgsConstructor
 public class PostRepository {
+
     private final EntityManager em;
 
     public void save(Post post){
@@ -36,4 +42,7 @@ public class PostRepository {
     public void remove(Post post){
         em.remove(post);
     }
+
+
+
 }

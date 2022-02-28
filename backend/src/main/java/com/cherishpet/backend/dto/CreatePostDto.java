@@ -25,7 +25,6 @@ public class CreatePostDto {
     private String imageURL;
     private String category; // Flight, Facility, TemporaryCare, Etc
 
-
     public static Post toEntity(CreatePostDto createPostDto) {
         Post post;
         switch (createPostDto.getCategory()) {

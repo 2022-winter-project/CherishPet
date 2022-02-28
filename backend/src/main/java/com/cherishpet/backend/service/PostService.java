@@ -4,12 +4,15 @@ import com.cherishpet.backend.domain.Application;
 import com.cherishpet.backend.domain.Member;
 import com.cherishpet.backend.domain.post.Post;
 import com.cherishpet.backend.dto.CreatePostDto;
+import com.cherishpet.backend.dto.PostSerachDto;
+import com.cherishpet.backend.dto.SearchResultDto;
 import com.cherishpet.backend.dto.UpdatePostDto;
 import com.cherishpet.backend.exception.CustomException;
 import com.cherishpet.backend.exception.ErrorCode;
 import com.cherishpet.backend.repository.ApplicationRepository;
 import com.cherishpet.backend.repository.MemberRepository;
 import com.cherishpet.backend.repository.PostRepository;
+import com.cherishpet.backend.repository.PostSearchRespository;
 import com.cherishpet.backend.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,6 +31,7 @@ public class PostService {
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
     private final ApplicationRepository applicationRepository;
+    private final PostSearchRespository postSearchRespository;
 
     public Post findOne(Long id){
         return postRepository.findOne(id);
@@ -38,10 +42,6 @@ public class PostService {
         String username = SecurityUtil.getCurrentUsername().get();
         return postRepository.findPostByUsername(username);
     }
-
-/**
- * QueryDSL 사용해서 조건 검색에 둘다 포함해서 함수 만들기 
- * */
 
     // 전체 게시글 조회
     public List<Post> findAllPost(){
@@ -84,4 +84,8 @@ public class PostService {
         postRepository.remove(post);
     }
 
+    // 게시물 검색
+    public List<SearchResultDto> searchPost(PostSerachDto postSerachDto){
+        return postSearchRespository.search(postSerachDto);
+    }
 }

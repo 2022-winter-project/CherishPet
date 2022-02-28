@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import static com.cherishpet.backend.util.SecurityUtil.getCurrentUsername;
@@ -63,6 +64,8 @@ public abstract class Post {
     @Enumerated(EnumType.STRING)
     private MatchingStatus matchingStatus;
 
+    private LocalDateTime postDate;
+
     //==게시물 생성 메서드==//
     public static Post createPost(CreatePostDto createPostDto, Member member) {
         Post post;
@@ -81,6 +84,7 @@ public abstract class Post {
                         .content(createPostDto.getContent())
                         .imageURL(createPostDto.getImageURL())
                         .matchingStatus(MatchingStatus.WAITING)
+                        .postDate(LocalDateTime.now())
                         .build();
                 break;
             case "Flight":
@@ -97,6 +101,7 @@ public abstract class Post {
                         .content(createPostDto.getContent())
                         .imageURL(createPostDto.getImageURL())
                         .matchingStatus(MatchingStatus.WAITING)
+                        .postDate(LocalDateTime.now())
                         .build();
                 break;
             case "TemporaryCare":
@@ -113,6 +118,7 @@ public abstract class Post {
                         .content(createPostDto.getContent())
                         .imageURL(createPostDto.getImageURL())
                         .matchingStatus(MatchingStatus.WAITING)
+                        .postDate(LocalDateTime.now())
                         .build();
                 break;
             default:
@@ -129,6 +135,7 @@ public abstract class Post {
                         .content(createPostDto.getContent())
                         .imageURL(createPostDto.getImageURL())
                         .matchingStatus(MatchingStatus.WAITING)
+                        .postDate(LocalDateTime.now())
                         .build();
                 break;
         }
