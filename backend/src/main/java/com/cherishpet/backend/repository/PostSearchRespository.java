@@ -4,11 +4,10 @@ import com.cherishpet.backend.domain.post.Post;
 import com.cherishpet.backend.dto.PostSerachDto;
 import com.cherishpet.backend.dto.QSearchResultDto;
 import com.cherishpet.backend.dto.SearchResultDto;
+import com.cherishpet.backend.util.SecurityUtil;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -48,12 +47,16 @@ public class PostSearchRespository {
         String keyword = postSerachDto.getKeyword();
         String sortType = postSerachDto.getSortType();
 
+        String username = SecurityUtil.getCurrentUsername().get();
+
         List<SearchResultDto> posts = queryFactory
                 .select(new QSearchResultDto(
                         post.place,
                         post.title,
+                        post.region,
                         post.requiredNum,
-                        post.applicationNum))
+                        post.applicationNum,
+                        post.postDate))
                 .from(post)
                 .where(regionEq(region), keywordEq(keyword))
                 .orderBy(sortEq(sortType))
@@ -85,4 +88,5 @@ public class PostSearchRespository {
         }
     }
     // BooleanExpression으로 리턴 하면 함수 조립해서 한번에 사용도 가능
+
 }
