@@ -62,6 +62,13 @@ public class MemberController {
 
         return new Response(201,true,"login member successfully", new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK));
     }
+    // 이력서 생성
+    @PostMapping("/api/v1/member/update")
+    @PreAuthorize("hasAnyRole('USER')")
+    public Response updateUserInfo(@Valid @RequestBody MemberInfoDto memberInfoDto){
+        memberService.updateMemberInfo(memberInfoDto);
+        return new Response(200,true,"update member successfully",memberInfoDto);
+    }
 
     // 자신의 정보 조회 (이력서 조회)
     @GetMapping("/api/v1/member")

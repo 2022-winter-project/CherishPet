@@ -3,6 +3,7 @@ package com.cherishpet.backend.service;
 import com.cherishpet.backend.domain.Authority;
 import com.cherishpet.backend.domain.Member;
 import com.cherishpet.backend.dto.CreateMemberDto;
+import com.cherishpet.backend.dto.MemberInfoDto;
 import com.cherishpet.backend.exception.CustomException;
 import com.cherishpet.backend.exception.ErrorCode;
 import com.cherishpet.backend.repository.MemberRepository;
@@ -73,9 +74,10 @@ public class MemberService {
 
     // 회원 정보 등록
     @Transactional
-    public void updateMemberInfo(Long id,String name, String sex, int age, String phoneNumber, String personality){
-        Member member = memberRepository.findOne(id);
-        member.updateMember(name, sex, age, phoneNumber, personality); // 변경 감지
+    public void updateMemberInfo(MemberInfoDto memberInfoDto){
+        String username = SecurityUtil.getCurrentUsername().get();
+        Member member = memberRepository.findOneWithAuthoritiesByUsername(username).get();
+        member.updateMember(memberInfoDto.getName(), memberInfoDto.getSex(), memberInfoDto.getAge(), memberInfoDto.getPhoneNumber(), memberInfoDto.getPersonality()); // 변경 감지
     }
 
     // 회원 정보 조회

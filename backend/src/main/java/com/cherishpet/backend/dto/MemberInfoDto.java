@@ -7,7 +7,6 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class MemberInfoDto {
-    private Long id;
     private String name;
     private String sex;
     private int age;
@@ -16,7 +15,6 @@ public class MemberInfoDto {
 
     @Builder
     public MemberInfoDto(Member member){
-        this.id = member.getId();
         this.name = member.getName();
         this.sex = member.getSex();
         this.age = member.getAge();
