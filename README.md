@@ -42,9 +42,20 @@
         +) admin 관리자 계정은 미리 생성해놓았으므로 테스트시 admin으로 바로 로그인 가능   
         +) API 요청시 ResponseBody에 JWT 토큰 리턴   
         +) swagger test시 오른쪽 측면에 있는 Authrization 버튼 누르고 "Bearer" + " " + 발급받은 Token 키 입력 -> 다른 API 사용 가능  
-        +) 헤더에 토큰 추가하지 않을 경우 UnAuthorized error 발생   
-
-    3) 게시물 생성  
+        +) 헤더에 토큰 추가하지 않을 경우 UnAuthorized error 발생     
+    3) 회원 정보 생성   
+         [POST] `localhost:8080/api/v1/member/update`  
+         [RequestBody]   
+         ```shell
+         {
+             "name":"hihi",
+             "sex":"F",
+             "age":23,
+             "phoneNumber":"1234",
+             "personality":"hi im song2"
+         }
+        ```
+    5) 게시물 생성  
         [POST] `localhost:8080/api/v1/post`  
         [RequestBody]    
         ```shell
@@ -77,6 +88,8 @@
         --> 신청 아이디를 FE가 저장할 수 없다면 변경될수도!!   
     7) 나의 신청내역 조회  
         [GET] `localhost:8080/api/v1/application`
+    8) 게시물 검색(쿼리스트링으로 데이터 가져오기)  
+        [GET] `localhost:8080/api/v1/post/search?region=대전&keyword=말티즈&sorting=최신순`
 
       
      
